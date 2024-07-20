@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   const { id, firstName, lastName, emailAddress, imageUrl } = clerkUser;
   // Get the current user from your database
   const user = {
-    id: clerkUser?.id,
+    id,
     info: {
       id,
       name: `$(firstName) $lastName`,
