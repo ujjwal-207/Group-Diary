@@ -1,16 +1,15 @@
-import React from "react";
-import { redirect } from "next/navigation";
-import { currentUser } from "@clerk/nextjs/server";
-import { UserButton } from "@clerk/nextjs";
-import Header from "@/components/Header";
-import { SignedIn } from "@clerk/clerk-react";
-import Image from "next/image";
 import AddDocumentBtn from "@/components/AddDocumentBtn";
-import { getDocuments } from "@/lib/actions/room.actions";
-import Link from "next/link";
-import { dateConverter } from "@/lib/utils";
 import { DeleteModal } from "@/components/DeleteModal";
+import Header from "@/components/Header";
 import Notifications from "@/components/Notification";
+import { Button } from "@/components/ui/button";
+import { getDocuments } from "@/lib/actions/room.actions";
+import { dateConverter } from "@/lib/utils";
+import { SignedIn, UserButton } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
+import Image from "next/image";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
 const Home = async () => {
   const clerkUser = await currentUser();
@@ -30,6 +29,7 @@ const Home = async () => {
           </SignedIn>
         </div>
       </Header>
+
       {roomDocuments.data.length > 0 ? (
         <div className="document-list-container">
           <div className="document-list-title">
@@ -67,14 +67,15 @@ const Home = async () => {
           </ul>
         </div>
       ) : (
-        <div>
+        <div className="document-list-empty">
           <Image
-            src="/assests/icons/docs.svg"
+            src="/assets/icons/doc.svg"
             alt="Document"
             width={40}
             height={40}
             className="mx-auto"
           />
+
           <AddDocumentBtn
             userId={clerkUser.id}
             email={clerkUser.emailAddresses[0].emailAddress}

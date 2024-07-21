@@ -1,7 +1,8 @@
-import "./globals.css";
 import { Inter as FontSans } from "next/font/google";
-import { Metadata } from "next";
+
 import { cn } from "@/lib/utils";
+import "./globals.css";
+import { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import Provider from "./Provider";
@@ -12,8 +13,8 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "Group-Diary",
-  description: "Your team Diary",
+  title: "LiveDocs",
+  description: "Your go-to collaborative editor",
 };
 
 export default function RootLayout({
@@ -25,14 +26,16 @@ export default function RootLayout({
     <ClerkProvider
       appearance={{
         baseTheme: dark,
-        variables: { colorPrimary: "#3371FF" },
+        variables: {
+          colorPrimary: "#3371FF",
+          fontSize: "16px",
+        },
       }}
     >
       <html lang="en" suppressHydrationWarning>
-        <head />
         <body
           className={cn(
-            "min-h-screen bg-background font-sans antialiased",
+            "min-h-screen font-sans antialiased",
             fontSans.variable
           )}
         >

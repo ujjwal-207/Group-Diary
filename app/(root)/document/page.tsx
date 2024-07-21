@@ -3,7 +3,6 @@ import { getDocument } from "@/lib/actions/room.actions";
 import { getClerkUsers } from "@/lib/actions/user.action";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import React from "react";
 
 const Document = async ({ params: { id } }: SearchParamProps) => {
   const clerkUser = await currentUser();
@@ -25,6 +24,7 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
       ? "editor"
       : "viewer",
   }));
+
   const currentUserType = room.usersAccesses[
     clerkUser.emailAddresses[0].emailAddress
   ]?.includes("room:write")
@@ -32,7 +32,7 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
     : "viewer";
 
   return (
-    <main>
+    <main className="flex w-full flex-col items-center">
       <CollaborativeRoom
         roomId={id}
         roomMetadata={room.metadata}
