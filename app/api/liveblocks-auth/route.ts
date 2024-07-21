@@ -9,12 +9,13 @@ export async function POST(request: Request) {
   if (!clerkUser) redirect("/sign-in");
 
   const { id, firstName, lastName, emailAddresses, imageUrl } = clerkUser;
+
   // Get the current user from your database
   const user = {
     id,
     info: {
       id,
-      name: `$(firstName) $lastName`,
+      name: `${firstName} ${lastName}`,
       email: emailAddresses[0].emailAddress,
       avatar: imageUrl,
       color: getUserColor(id),
