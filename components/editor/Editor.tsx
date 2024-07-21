@@ -11,12 +11,16 @@ import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import React from "react";
 import {
+  FloatingComposer,
+  FloatingThreads,
   liveblocksConfig,
   LiveblocksPlugin,
   useEditorStatus,
 } from "@liveblocks/react-lexical";
 import Loader from "../Loader";
 import FloatingToolbar from "./plugins/FloatingToolbarPlugins";
+import { useThreads } from "@liveblocks/react/suspense";
+import Comments from "../Comments";
 
 function Placeholder() {
   return <div className="editor-placeholder">Enter some rich text...</div>;
@@ -30,6 +34,7 @@ export function Editor({
   currentUserType: UserType;
 }) {
   const status = useEditorStatus();
+  const { threads } = useThreads();
 
   const initialConfig = liveblocksConfig({
     namespace: "Editor",
@@ -66,7 +71,11 @@ export function Editor({
               <AutoFocusPlugin />
             </div>
           )}
-          <LiveblocksPlugin></LiveblocksPlugin>
+          <LiveblocksPlugin>
+            <FloatingComposer className="w-[350px]" />
+            <FloatingThreads threads={threads} />
+            <Comments />
+          </LiveblocksPlugin>
         </div>
       </div>
     </LexicalComposer>
