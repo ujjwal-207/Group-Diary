@@ -10,6 +10,7 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import React from "react";
+
 import {
   FloatingComposer,
   FloatingThreads,
@@ -18,10 +19,15 @@ import {
   useEditorStatus,
 } from "@liveblocks/react-lexical";
 import Loader from "../Loader";
+
 import FloatingToolbar from "./plugins/FloatingToolbarPlugins";
 import { useThreads } from "@liveblocks/react/suspense";
 import Comments from "../Comments";
 import { DeleteModal } from "../DeleteModal";
+
+// Catch any errors that occur during Lexical updates and log them
+// or throw them as needed. If you don't throw them, Lexical will
+// try to recover gracefully without losing user data.
 
 function Placeholder() {
   return <div className="editor-placeholder">Enter some rich text...</div>;
@@ -55,6 +61,7 @@ export function Editor({
           <ToolbarPlugin />
           {currentUserType === "editor" && <DeleteModal roomId={roomId} />}
         </div>
+
         <div className="editor-wrapper flex flex-col items-center justify-start">
           {status === "not-loaded" || status === "loading" ? (
             <Loader />
@@ -72,6 +79,7 @@ export function Editor({
               <AutoFocusPlugin />
             </div>
           )}
+
           <LiveblocksPlugin>
             <FloatingComposer className="w-[350px]" />
             <FloatingThreads threads={threads} />

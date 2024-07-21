@@ -20,7 +20,6 @@ export const createDocument = async ({
     };
 
     const usersAccesses: RoomAccesses = {
-      //for access
       [email]: ["room:write"],
     };
 
@@ -37,6 +36,7 @@ export const createDocument = async ({
     console.log(`Error happened while creating a room: ${error}`);
   }
 };
+
 export const getDocument = async ({
   roomId,
   userId,
@@ -58,6 +58,7 @@ export const getDocument = async ({
     console.log(`Error happened while getting a room: ${error}`);
   }
 };
+
 export const updateDocument = async (roomId: string, title: string) => {
   try {
     const updatedRoom = await liveblocks.updateRoom(roomId, {
@@ -73,6 +74,7 @@ export const updateDocument = async (roomId: string, title: string) => {
     console.log(`Error happened while updating a room: ${error}`);
   }
 };
+
 export const getDocuments = async (email: string) => {
   try {
     const rooms = await liveblocks.getRooms({ userId: email });
@@ -82,6 +84,7 @@ export const getDocuments = async (email: string) => {
     console.log(`Error happened while getting rooms: ${error}`);
   }
 };
+
 export const updateDocumentAccess = async ({
   roomId,
   email,
@@ -148,6 +151,7 @@ export const removeCollaborator = async ({
     console.log(`Error happened while removing a collaborator: ${error}`);
   }
 };
+
 export const deleteDocument = async (roomId: string) => {
   try {
     await liveblocks.deleteRoom(roomId);

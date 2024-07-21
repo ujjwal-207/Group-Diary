@@ -1,14 +1,16 @@
 "use client";
+
 import { ClientSideSuspense, RoomProvider } from "@liveblocks/react/suspense";
-import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@/components/editor/Editor";
 import Header from "@/components/Header";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import ActiveCollaborators from "./ActiveCollaborators";
+import { useEffect, useRef, useState } from "react";
 import { Input } from "./ui/input";
 import Image from "next/image";
 import { updateDocument } from "@/lib/actions/room.actions";
 import Loader from "./Loader";
+import ShareModal from "./ShareModel";
 
 const CollaborativeRoom = ({
   roomId,
@@ -22,11 +24,13 @@ const CollaborativeRoom = ({
 
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
+
   const updateTitleHandler = async (
     e: React.KeyboardEvent<HTMLInputElement>
   ) => {
     if (e.key === "Enter") {
       setLoading(true);
+
       try {
         if (documentTitle !== roomMetadata.title) {
           const updatedDocument = await updateDocument(roomId, documentTitle);
@@ -42,6 +46,7 @@ const CollaborativeRoom = ({
       setLoading(false);
     }
   };
+
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
@@ -54,19 +59,22 @@ const CollaborativeRoom = ({
     };
 
     document.addEventListener("mousedown", handleClickOutside);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [roomId, documentTitle]);
+
   useEffect(() => {
     if (editing && inputRef.current) {
       inputRef.current.focus();
     }
   }, [editing]);
+
   return (
     <RoomProvider id={roomId}>
       <ClientSideSuspense fallback={<Loader />}>
-        <div className="flex w-fit items-center justify-center">
+        <div className="collaborative-room">
           <Header>
             <div
               ref={containerRef}
@@ -88,6 +96,7 @@ const CollaborativeRoom = ({
                   <p className="document-title">{documentTitle}</p>
                 </>
               )}
+
               {currentUserType === "editor" && !editing && (
                 <Image
                   src="/assets/icons/edit.svg"
@@ -105,15 +114,23 @@ const CollaborativeRoom = ({
 
               {loading && <p className="text-sm text-gray-400">saving...</p>}
             </div>
-            <div className="flex w-full flex-1 justify-end gap-2">
+            <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
               <ActiveCollaborators />
+
+              <ShareModal
+                roomId={roomId}
+                collaborators={users}
+                creatorId={roomMetadata.creatorId}
+                currentUserType={currentUserType}
+              />
+
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
             </div>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
           </Header>
           <Editor roomId={roomId} currentUserType={currentUserType} />
         </div>

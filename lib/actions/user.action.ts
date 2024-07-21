@@ -26,6 +26,7 @@ export const getClerkUsers = async ({ userIds }: { userIds: string[] }) => {
     console.log(`Error fetching users: ${error}`);
   }
 };
+
 export const getDocumentUsers = async ({
   roomId,
   currentUser,

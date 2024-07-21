@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { mergeRegister } from '@lexical/utils';
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { mergeRegister } from "@lexical/utils";
 import {
   $createParagraphNode,
   $isRootOrShadowRoot,
@@ -19,22 +19,22 @@ import {
   REDO_COMMAND,
   SELECTION_CHANGE_COMMAND,
   UNDO_COMMAND,
-} from 'lexical';
+} from "lexical";
 import {
   $createHeadingNode,
   $createQuoteNode,
   $isHeadingNode,
-} from '@lexical/rich-text';
-import { $setBlocksType } from '@lexical/selection';
-import { $findMatchingParent } from '@lexical/utils';
-import React from 'react';
+} from "@lexical/rich-text";
+import { $setBlocksType } from "@lexical/selection";
+import { $findMatchingParent } from "@lexical/utils";
+import React from "react";
 import {
   useCallback,
   useEffect,
   useRef,
   useState,
   useSyncExternalStore,
-} from 'react';
+} from "react";
 
 const LowPriority = 1;
 
@@ -57,10 +57,10 @@ export default function ToolbarPlugin() {
     const selection = $getSelection();
     if ($isRangeSelection(selection)) {
       // Update text format
-      setIsBold(selection.hasFormat('bold'));
-      setIsItalic(selection.hasFormat('italic'));
-      setIsUnderline(selection.hasFormat('underline'));
-      setIsStrikethrough(selection.hasFormat('strikethrough'));
+      setIsBold(selection.hasFormat("bold"));
+      setIsItalic(selection.hasFormat("italic"));
+      setIsUnderline(selection.hasFormat("underline"));
+      setIsStrikethrough(selection.hasFormat("strikethrough"));
     }
   }, []);
 
@@ -77,7 +77,7 @@ export default function ToolbarPlugin() {
           $updateToolbar();
           return false;
         },
-        LowPriority,
+        LowPriority
       ),
       editor.registerCommand(
         CAN_UNDO_COMMAND,
@@ -85,7 +85,7 @@ export default function ToolbarPlugin() {
           setCanUndo(payload);
           return false;
         },
-        LowPriority,
+        LowPriority
       ),
       editor.registerCommand(
         CAN_REDO_COMMAND,
@@ -93,31 +93,31 @@ export default function ToolbarPlugin() {
           setCanRedo(payload);
           return false;
         },
-        LowPriority,
-      ),
+        LowPriority
+      )
     );
   }, [editor, $updateToolbar]);
 
-  function toggleBlock(type: 'h1' | 'h2' | 'h3' | 'quote') {
+  function toggleBlock(type: "h1" | "h2" | "h3" | "quote") {
     const selection = $getSelection();
 
     if (activeBlock === type) {
       return $setBlocksType(selection, () => $createParagraphNode());
     }
 
-    if (type === 'h1') {
-      return $setBlocksType(selection, () => $createHeadingNode('h1'));
+    if (type === "h1") {
+      return $setBlocksType(selection, () => $createHeadingNode("h1"));
     }
 
-    if (type === 'h2') {
-      return $setBlocksType(selection, () => $createHeadingNode('h2'));
+    if (type === "h2") {
+      return $setBlocksType(selection, () => $createHeadingNode("h2"));
     }
 
-    if (type === 'h3') {
-      return $setBlocksType(selection, () => $createHeadingNode('h3'));
+    if (type === "h3") {
+      return $setBlocksType(selection, () => $createHeadingNode("h3"));
     }
 
-    if (type === 'quote') {
+    if (type === "quote") {
       return $setBlocksType(selection, () => $createQuoteNode());
     }
   }
@@ -146,28 +146,28 @@ export default function ToolbarPlugin() {
       </button>
       <Divider />
       <button
-        onClick={() => editor.update(() => toggleBlock('h1'))}
-        data-active={activeBlock === 'h1' ? '' : undefined}
+        onClick={() => editor.update(() => toggleBlock("h1"))}
+        data-active={activeBlock === "h1" ? "" : undefined}
         className={
-          'toolbar-item spaced ' + (activeBlock === 'h1' ? 'active' : '')
+          "toolbar-item spaced " + (activeBlock === "h1" ? "active" : "")
         }
       >
         <i className="format h1" />
       </button>
       <button
-        onClick={() => editor.update(() => toggleBlock('h2'))}
-        data-active={activeBlock === 'h2' ? '' : undefined}
+        onClick={() => editor.update(() => toggleBlock("h2"))}
+        data-active={activeBlock === "h2" ? "" : undefined}
         className={
-          'toolbar-item spaced ' + (activeBlock === 'h2' ? 'active' : '')
+          "toolbar-item spaced " + (activeBlock === "h2" ? "active" : "")
         }
       >
         <i className="format h2" />
       </button>
       <button
-        onClick={() => editor.update(() => toggleBlock('h3'))}
-        data-active={activeBlock === 'h3' ? '' : undefined}
+        onClick={() => editor.update(() => toggleBlock("h3"))}
+        data-active={activeBlock === "h3" ? "" : undefined}
         className={
-          'toolbar-item spaced ' + (activeBlock === 'h3' ? 'active' : '')
+          "toolbar-item spaced " + (activeBlock === "h3" ? "active" : "")
         }
       >
         <i className="format h3" />
@@ -175,36 +175,36 @@ export default function ToolbarPlugin() {
       <Divider />
       <button
         onClick={() => {
-          editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
+          editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
         }}
-        className={'toolbar-item spaced ' + (isBold ? 'active' : '')}
+        className={"toolbar-item spaced " + (isBold ? "active" : "")}
         aria-label="Format Bold"
       >
         <i className="format bold" />
       </button>
       <button
         onClick={() => {
-          editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
+          editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
         }}
-        className={'toolbar-item spaced ' + (isItalic ? 'active' : '')}
+        className={"toolbar-item spaced " + (isItalic ? "active" : "")}
         aria-label="Format Italics"
       >
         <i className="format italic" />
       </button>
       <button
         onClick={() => {
-          editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
+          editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
         }}
-        className={'toolbar-item spaced ' + (isUnderline ? 'active' : '')}
+        className={"toolbar-item spaced " + (isUnderline ? "active" : "")}
         aria-label="Format Underline"
       >
         <i className="format underline" />
       </button>
       <button
         onClick={() => {
-          editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough');
+          editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
         }}
-        className={'toolbar-item spaced ' + (isStrikethrough ? 'active' : '')}
+        className={"toolbar-item spaced " + (isStrikethrough ? "active" : "")}
         aria-label="Format Strikethrough"
       >
         <i className="format strikethrough" />
@@ -212,7 +212,7 @@ export default function ToolbarPlugin() {
       <Divider />
       <button
         onClick={() => {
-          editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left');
+          editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left");
         }}
         className="toolbar-item spaced"
         aria-label="Left Align"
@@ -221,7 +221,7 @@ export default function ToolbarPlugin() {
       </button>
       <button
         onClick={() => {
-          editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center');
+          editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center");
         }}
         className="toolbar-item spaced"
         aria-label="Center Align"
@@ -230,7 +230,7 @@ export default function ToolbarPlugin() {
       </button>
       <button
         onClick={() => {
-          editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'right');
+          editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right");
         }}
         className="toolbar-item spaced"
         aria-label="Right Align"
@@ -239,13 +239,13 @@ export default function ToolbarPlugin() {
       </button>
       <button
         onClick={() => {
-          editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify');
+          editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify");
         }}
         className="toolbar-item"
         aria-label="Justify Align"
       >
         <i className="format justify-align" />
-      </button>{' '}
+      </button>{" "}
     </div>
   );
 }
@@ -257,7 +257,7 @@ function useActiveBlock() {
     (onStoreChange: () => void) => {
       return editor.registerUpdateListener(onStoreChange);
     },
-    [editor],
+    [editor]
   );
 
   const getSnapshot = useCallback(() => {
@@ -267,7 +267,7 @@ function useActiveBlock() {
 
       const anchor = selection.anchor.getNode();
       let element =
-        anchor.getKey() === 'root'
+        anchor.getKey() === "root"
           ? anchor
           : $findMatchingParent(anchor, (e) => {
               const parent = e.getParent();
