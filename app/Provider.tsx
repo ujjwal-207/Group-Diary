@@ -7,31 +7,38 @@ import {
   ClientSideSuspense,
   LiveblocksProvider,
 } from "@liveblocks/react/suspense";
+import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
 
 const Provider = ({ children }: { children: ReactNode }) => {
   const { user: clerkUser } = useUser();
 
   return (
-    <LiveblocksProvider
-      authEndpoint="/api/liveblocks-auth"
-      resolveUsers={async ({ userIds }) => {
-        const users = await getClerkUsers({ userIds });
+    <>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <LiveblocksProvider
+          authEndpoint="/api/liveblocks-auth"
+          resolveUsers={async ({ userIds }) => {
+            const users = await getClerkUsers({ userIds });
 
-        return users;
-      }}
-      resolveMentionSuggestions={async ({ text, roomId }) => {
-        const roomUsers = await getDocumentUsers({
-          roomId,
-          currentUser: clerkUser?.emailAddresses[0].emailAddress!,
-          text,
-        });
+            return users;
+          }}
+          resolveMentionSuggestions={async ({ text, roomId }) => {
+            const roomUsers = await getDocumentUsers({
+              roomId,
+              currentUser: clerkUser?.emailAddresses[0].emailAddress!,
+              text,
+            });
 
-        return roomUsers;
-      }}
-    >
-      <ClientSideSuspense fallback={<Loader />}>{children}</ClientSideSuspense>
-    </LiveblocksProvider>
+            return roomUsers;
+          }}
+        >
+          <ClientSideSuspense fallback={<Loader />}>
+            {children}
+          </ClientSideSuspense>
+        </LiveblocksProvider>
+      </ThemeProvider>
+    </>
   );
 };
 
