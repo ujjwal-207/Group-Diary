@@ -19,12 +19,13 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![Contributors][contributors-shield]][contributors-url]
+<!-- [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[![MIT License][license-shield]][license-url] -->
+
+[![LinkedIn][linkedin-shield]][https://www.linkedin.com/in/ujjwal-nepal-33980a245/]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -79,9 +80,10 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]]![alt text](image.png)(https://example.com)
+[![ScreenShots][product-screenshot]]![alt text](image.png)(https://example.com)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+This the collabrative diary where one user input can be modified read by the other user. The user who creates the docs can assign what other
+user can do only read or can modify also. This all in realtime
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -114,7 +116,7 @@ This is an example of how to list things you need to use the software and how to
 
 2. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/ujjwal-207/Group-Diary.git
    ```
 3. Install NPM packages
    ```sh
@@ -136,7 +138,7 @@ This is an example of how to list things you need to use the software and how to
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+This can be used to write the note where all people are woking in same project
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
@@ -146,12 +148,10 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-  - [ ] Nested Feature
+- [ ] Realtime Monitoring the docs
+- [ ] Can assign what other can do
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/ujjwal-207/Group-Diary/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -184,15 +184,15 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Ujjwal Nepal- [@twitter_handle](https://x.com/Ujee690) - ujjwalnepal2060@gmail.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
+Project Link: [https://github.com/github_username/repo_name](https://github.com/ujjwal-207/Group-Diary)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGMENTS
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
