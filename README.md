@@ -1,6 +1,6 @@
 # Group Diary
 
-**Group Diary** is a collaborative diary application built using **Next.js** and **MongoDB**. It allows users to create or join groups and share diary entries in a private environment, making it ideal for families, friends, or project teams.
+**Group Diary** is a collaborative diary application built using **Next.js** and **LiveDocs**. It allows users to create or join groups and share diary entries in a private environment, making it ideal for families, friends, or project teams.
 
 ## 🚀 Features
 
